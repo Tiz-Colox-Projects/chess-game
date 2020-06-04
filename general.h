@@ -52,3 +52,21 @@ void about(){
     cout<<"Source code vailable on GitHub: https://github.com/Tiz314/Chess"<<endl;
     enter();
 }
+
+class gioc{
+    public:
+        string name;
+        
+        gioc();
+        void insertName(string n);
+        string getName(); 
+};
+
+gioc::gioc(){
+}
+void gioc::insertName(string n){
+    name=n;
+}
+string gioc::getName(){
+    return name;
+}

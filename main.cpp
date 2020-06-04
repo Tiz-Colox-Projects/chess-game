@@ -15,6 +15,14 @@ int main(){
 				enter();
 				system("cls");
 				//play
+				gioc p1,p2;
+				string n;
+				cout<<"Please, insert player 1 (white) name: ";
+				cin>>n;
+				p1.insertName(n);
+				cout<<"please, insert player 2 (black) name: ";
+				cin>>n;
+				p2.insertName(n);
 				break;
 			}
 			case '2':{
