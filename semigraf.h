@@ -47,122 +47,114 @@ int getx(void);
 int gety(void);
 int align(int align, char str[]);
 
-void gotoxy(int x,int y)
-{
-setx(x);
-sety(y);
+void gotoxy(int x,int y){
+    setx(x);
+    sety(y);
 }
 
-void setx(int x)
-{
-COORD pos;
-pos.X = x;
-pos.Y = gety();
-SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
+void setx(int x){
+    COORD pos;
+    pos.X = x;
+    pos.Y = gety();
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
 }
 
-void sety(int y)
-{
-COORD pos;
-pos.X = getx();
-pos.Y = y;
-SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
+void sety(int y){
+    COORD pos;
+    pos.X = getx();
+    pos.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),pos);
 }
 
-void setcolor(unsigned short int color)
-{
-SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
+void setcolor(unsigned short int color){
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),color);
 }
 
-void delay(unsigned long int milisec)
-{
-clock_t start,end,loop;
+void delay(unsigned long int milisec){
+    clock_t start,end,loop;
 
-start = clock();
-end = (start+milisec);
+    start = clock();
+    end = (start+milisec);
 
-do {
-    loop = clock();
-} while(loop<end);
+    do {
+        loop = clock();
+    } while(loop<end);
 }
 
-void setcursor(int ctype) 
-{
-CONSOLE_CURSOR_INFO type;
-switch(ctype)
-{
-    case _NOCURSOR:
-    type.bVisible = false;
-    break;
-    case _SOLIDCURSOR:
-    type.dwSize = 100;
-    type.bVisible = true;
-    break;
-    case _NORMALCURSOR:
-    type.dwSize = 1;
-    type.bVisible = true;
-    default:
-    type.dwSize = 1;
-    type.bVisible = true;
-    break;
+void setcursor(int ctype){
+    CONSOLE_CURSOR_INFO type;
+    switch(ctype){
+        case _NOCURSOR:
+            type.bVisible = false;
+            break;
+        case _SOLIDCURSOR:
+            type.dwSize = 100;
+            type.bVisible = true;
+            break;
+        case _NORMALCURSOR:
+            type.dwSize = 1;
+            type.bVisible = true;
+        default:
+            type.dwSize = 1;
+            type.bVisible = true;
+            break;
 }
 SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&type);
 }
 
-void clrscr(void)
-{
-CONSOLE_SCREEN_BUFFER_INFO window;
-setcolor(WHITE);
-for(int y = 0; y < window.dwSize.Y; y++)
-{
-    for(int x = 0; x < window.dwSize.X; x++)
+void clrscr(void){
+    CONSOLE_SCREEN_BUFFER_INFO window;
+    setcolor(WHITE);
+    for(int y = 0; y < window.dwSize.Y; y++)
     {
-        gotoxy(x,y);printf(" ");
+        for(int x = 0; x < window.dwSize.X; x++)
+        {
+            gotoxy(x,y);printf(" ");
+        }
     }
-}
 }
 
 int getx(void)
 {
-CONSOLE_SCREEN_BUFFER_INFO window;
-GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &window);
-return window.dwCursorPosition.X;
+    CONSOLE_SCREEN_BUFFER_INFO window;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &window);
+    return window.dwCursorPosition.X;
 }
 
 int gety(void)
 {
-CONSOLE_SCREEN_BUFFER_INFO window;
-GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &window);
-return window.dwCursorPosition.Y;
+    CONSOLE_SCREEN_BUFFER_INFO window;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &window);
+    return window.dwCursorPosition.Y;
 }
 
 int align(int align, char str[])
 {
-int x;
-switch(align)
-{
-case 0:
-x = (0);
-break;
-case 1:
-x = (40-(strlen(str)/2));
-break;
-case 2:
-x = (79-(strlen(str)));
-break;
-default:
-printf("ERROR:\nalign(int align, char str[]) aborted.\nERROR CAUSE:\nnon-feasible parameter number in int align detected.");
-getche();
-exit(0);
-break;
-}
-if(strlen(str) > 79) {
-printf("ERROR:\nalign(int align, char str[]) aborted.\nERROR CAUSE:\nnon-feasible parameter number in int align detected."); 
-exit(0);
-}
-else {
-gotoxy(x,gety());printf("%s",str);
-}
+    int x;
+    switch(align)
+    {
+        case 0:
+            x = (0);
+            break;
+        case 1:
+            x = (40-(strlen(str)/2));
+            break;
+        case 2:
+            x = (79-(strlen(str)));
+            break;
+        default:
+            printf("ERROR:\nalign(int align, char str[]) aborted.\nERROR CAUSE:\nnon-feasible parameter number in int align detected.");
+            getche();
+            exit(0);
+            break;
+     }
+    if(strlen(str) > 79) {
+        printf("ERROR:\nalign(int align, char str[]) aborted.\nERROR CAUSE:\nnon-feasible parameter number in int align detected."); 
+        exit(0);
+    }
+    else {
+        gotoxy(x,gety());printf("%s",str);
+    }
 }
 
 #endif
