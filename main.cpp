@@ -23,6 +23,10 @@ int main(){
 				cout<<"please, insert player 2 (black) name: ";
 				cin>>n;
 				p2.insertName(n);
+				board mat;
+				mat.zero();
+				mat.getBoard();
+				enter();
 				break;
 			}
 			case '2':{

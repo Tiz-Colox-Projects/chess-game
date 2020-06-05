@@ -45,7 +45,7 @@ void setcursor(int ctype);
 void clrscr(void);
 int getx(void);
 int gety(void);
-int align(int align, char str[]);
+void align(int align, char str[]);
 
 void gotoxy(int x,int y){
     setx(x);
@@ -128,7 +128,7 @@ int gety(void)
     return window.dwCursorPosition.Y;
 }
 
-int align(int align, char str[])
+void align(int align, char str[])
 {
     int x;
     switch(align)
@@ -158,4 +158,3 @@ int align(int align, char str[])
 }
 
 #endif
-

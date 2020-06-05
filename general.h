@@ -1,6 +1,8 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <iomanip>
+#include "semigraf.h"
 using namespace std;
 
 void menu(){
@@ -69,4 +71,60 @@ void gioc::insertName(string n){
 }
 string gioc::getName(){
     return name;
+}
+
+
+class board{
+    public:
+        int DIM=8;
+        char mat[8][8];
+        //attr
+        //metodi
+        board();
+        void zero();
+        void getBoard();
+};
+
+board::board(){
+}
+void board::zero(){
+    for(int i=0;i<DIM;i++){
+        for(int c=0;c<DIM;c++){
+            mat[i][c]='a';
+        }
+    }
+}
+void board::getBoard(){ 
+	char a=65;
+	cout<<"          ";
+	for(int i=0;i<=7;i++){
+		cout<<"+-----------";
+	}
+	cout<<"+";
+	cout<<endl;
+	cout<<"          ";
+	for(int i=0;i<=7;i++){
+		cout<<"|     ";
+		for(int i=0;i<1;i++){
+			cout<<a<<"     ";
+			a++;
+		}
+	}
+	cout<<"|";
+	cout<<endl;
+	cout<<"          ";
+	for(int i=0;i<=7;i++){
+		cout<<"+-----------";
+	}
+	cout<<"+";
+	cout<<endl<<endl;
+	for(int i=0;i<DIM;i++){
+		cout<<"+-----+"<<"   "<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+"<<endl;
+		cout<<"|  "<<i+1<<"  |   |";
+		for(int c=0;c<DIM;c++){
+			cout<<"     "<<mat[i][c]<<"     |";
+		}
+		cout<<endl;
+	}
+	cout<<"+-----+"<<"   "<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+"<<endl;
 }
