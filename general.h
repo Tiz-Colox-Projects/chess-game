@@ -6,6 +6,7 @@
 using namespace std;
 
 void menu(){
+    setcolor(3);
     system("cls");
     cout<<"        CCCCCCCCCCCCChhhhhhh                                                                   "<<endl;
     Sleep(100);
@@ -38,6 +39,7 @@ void menu(){
     cout<<"     CCC::::::::::::C h:::::h     h:::::h  ee:::::::::::::e   s:::::::::::ss   s:::::::::::ss  "<<endl;
     Sleep(100);
     cout<<"        CCCCCCCCCCCCC hhhhhhh     hhhhhhh    eeeeeeeeeeeeee    sssssssssss      sssssssssss    "<<endl<<endl;
+    setcolor(15);
     cout<<"Welcome to Chess! Please, select an option: "<<endl;
     cout<<"1- Play \n2- About \n3- Exit"<<endl;
 }
@@ -90,12 +92,13 @@ board::board(){
 void board::zero(){
     for(int i=0;i<DIM;i++){
         for(int c=0;c<DIM;c++){
-            mat[i][c]='a';
+            mat[i][c]=' ';
         }
     }
 }
 void board::getBoard(){ 
 	char a=65;
+    setcolor(3);
     gotoxy(10,2); //start abc
     for(int i=0;i<=7;i++){
 		cout<<"+-----------";
@@ -121,7 +124,6 @@ void board::getBoard(){
         cout<<"+-----+";
         cont++;
         gotoxy(0,cont);
-        //cout<<"|  "<<i+1<<"  |";
         cout<<"|     |";
         cont++;
         gotoxy(0,cont);
@@ -135,6 +137,7 @@ void board::getBoard(){
     gotoxy(0,cont);
     cout<<"+-----+"; //end num
     cont=6;
+    setcolor(15);
     for(int i=0;i<DIM;i++){ //start board
         gotoxy(10,cont);
         cout<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+";
