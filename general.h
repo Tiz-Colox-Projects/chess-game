@@ -96,12 +96,11 @@ void board::zero(){
 }
 void board::getBoard(){ 
 	char a=65;
-    gotoxy(10,2); //inizio tabella abc
+    gotoxy(10,2); //start abc
     for(int i=0;i<=7;i++){
 		cout<<"+-----------";
 	}
 	cout<<"+";
-	//cout<<endl;
     gotoxy(10,3);
 	for(int i=0;i<=7;i++){
 		cout<<"|     ";
@@ -111,38 +110,35 @@ void board::getBoard(){
 		}
 	}
     cout<<"|";
-	//cout<<endl;
     gotoxy(10,4);
     for(int i=0;i<=7;i++){
 		cout<<"+-----------";
     }
-	cout<<"+"; //fine tabella abc
+	cout<<"+"; //end abc
     int cont=6;
-    for(int i=0;i<DIM;i++){ //inizio tabella num
+    for(int i=0;i<DIM;i++){ //start num
         gotoxy(0,cont);
-        cout<<"+-----+";//<<endl;
+        cout<<"+-----+";
         cont++;
         gotoxy(0,cont);
-        cout<<"|  "<<i+1<<"  |";//<<endl;
+        cout<<"|  "<<i+1<<"  |";
         cont++;
     }
     gotoxy(0,cont);
-    cout<<"+-----+"; //fine tabella num
+    cout<<"+-----+"; //end num
     cont=6;
-    for(int i=0;i<DIM;i++){ //inizio campo
+    for(int i=0;i<DIM;i++){ //start board
         gotoxy(10,cont);
-        cout<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+";//<<endl;
+        cout<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+";
 		cont++;
         gotoxy(10,cont);
         cout<<"|";
         for(int c=0;c<DIM;c++){
 			cout<<"     "<<mat[i][c]<<"     |";
 		}
-		//cout<<endl;
         cont++;
 	}
-    //cont++;
     gotoxy(10,cont);
-	cout<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+";//<<endl; //fine campo
+	cout<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+"; //end board
     cout<<endl<<endl;
 }
