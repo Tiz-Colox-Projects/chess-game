@@ -5,7 +5,8 @@ Scacchiera::Scacchiera(){
 }
 
 void Scacchiera::getInizio(){
-    for(int i=0; i<8; i++){                     //Ciclo per selezionare la riga
+    int c=0;
+    for(int i=7; i>=0; i--){                     //Ciclo per selezionare la riga
         for(int j=0; j<8; j++){                 //Ciclo per selezionare la colonna
             switch(i){
                 case 0:{                        //Caso della riga più in alto, quella nera
@@ -29,6 +30,12 @@ void Scacchiera::getInizio(){
                 default:{
                     campo[i][j]=0;
                 }
+            }
+            if(campo[i][j]!=0){
+                pezzi[c].tipo=campo[i][j];
+                pezzi[c].riga=i;
+                pezzi[c].col=j;
+                c++;
             }
         }
     }
