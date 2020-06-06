@@ -116,13 +116,21 @@ void board::getBoard(){
     }
 	cout<<"+"; //end abc
     int cont=6;
-    for(int i=0;i<DIM;i++){ //start num
+    for(int i=DIM;i>0;i--){ //start num
         gotoxy(0,cont);
         cout<<"+-----+";
         cont++;
         gotoxy(0,cont);
-        cout<<"|  "<<i+1<<"  |";
+        //cout<<"|  "<<i+1<<"  |";
+        cout<<"|     |";
         cont++;
+        gotoxy(0,cont);
+        cout<<"|  "<<i<<"  |";
+        cont++;
+        gotoxy(0,cont);
+        cout<<"|     |";
+        cont++;
+
     }
     gotoxy(0,cont);
     cout<<"+-----+"; //end num
@@ -132,10 +140,16 @@ void board::getBoard(){
         cout<<"+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+";
 		cont++;
         gotoxy(10,cont);
+        cout<<"|           |           |           |           |           |           |           |           |";
+        cont++;
+        gotoxy(10,cont);
         cout<<"|";
         for(int c=0;c<DIM;c++){
 			cout<<"     "<<mat[i][c]<<"     |";
 		}
+        cont++;
+        gotoxy(10,cont);
+        cout<<"|           |           |           |           |           |           |           |           |";
         cont++;
 	}
     gotoxy(10,cont);
