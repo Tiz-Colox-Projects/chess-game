@@ -31,11 +31,12 @@ void Scacchiera::getInizio(){
                     campo[i][j]=0;
                 }
             }
-            if(campo[i][j]!=0){
-                pezzi[c].tipo=campo[i][j];
-                pezzi[c].riga=i;
-                pezzi[c].col=j;
-                c++;
+            if(campo[i][j]!=0){                 /*Se la casella viene riempita con un pezzo questo viene memorizzato
+                                                nell'array dei pezzi presenti sulla scacchiera*/
+                pezzi[c].tipo=campo[i][j];      //Memorizzazione del tipo
+                pezzi[c].riga=i;                //Memorizzazione della riga
+                pezzi[c].col=j;                 //Memorizzazione della colonna
+                c++;                            //Incremento della variabile contatore
             }
         }
     }

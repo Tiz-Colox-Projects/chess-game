@@ -22,8 +22,5 @@ class Scacchiera{
                             10=alfieri
                             11=regina
                             12=re*/
-    /*    int tipo[32];       //Dati riguardanti le coordinate e il tipo per ogni pezzo
-        int riga[32];       //Per il tipo sono usati gli stessi numeri della scacchiera
-        int col[32];*/
-        DatiPezzo pezzi[32];
+        DatiPezzo pezzi[32];        //Oggetti che rappresentano ogni pezzo presente sulla scacchiera
 };
