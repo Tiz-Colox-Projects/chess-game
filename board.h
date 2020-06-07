@@ -16,7 +16,7 @@ class board{
                             5=queen
                             6=king
 
-                            The white pieces are indicated with
+                            The black pieces are indicated with
                             7=pawns
                             8=rooks
                             9=knights
