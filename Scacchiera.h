@@ -2,8 +2,9 @@
 
 class Scacchiera{
     public:
-        Scacchiera(); //Costruttore
-        void getInizio(); //Genera la disposizione iniziale della scacchiera
+        Scacchiera();                                   //Costruttore
+        void getInizio();                               //Genera la disposizione iniziale della scacchiera
+        bool contrSelezione(int riga, int col, int player);      //Verifica che la selzione del pezzo selezionato sia valida
     private:
         int campo[8][8];    /*Matrice che indica i pezzi sulla scacchiera.
 

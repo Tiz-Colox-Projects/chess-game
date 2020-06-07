@@ -41,3 +41,17 @@ void Scacchiera::getInizio(){
         }
     }
 }
+
+bool Scacchiera::contrSelezione(int riga, int col, int player){
+    if(campo[riga][col]==0) return false;       //Se la casella selezionata è vuota viene invalidata la selezione
+    else{
+        if(player==1 && campo[riga][col]>6) return false;   /*Se è il turno del giocatore 1(bianco) e la selezione
+                                                            supera il valore 6 (è stato selzionato un pezzo neropezzo nero) 
+                                                            viene invalidata*/
+        else if(player==2 && campo[riga][col]<7) return false;  /*Se è il turno del giocatore 2(nero) e la selezione
+                                                                è inferiore al valore 7 (è stato selzionato un pezzo bianco) 
+                                                                viene invalidata*/
+        else return true;           /*Se nessuna delle condizioni precedenti è rispettata vuol dire che è stato selezionato un pezzo 
+                                    del proprio colore e la selezione viene convalidata*/
+    }
+}
