@@ -1,36 +1,36 @@
 #include <iostream>
 #include "semigraf.h"
-#include "datiPezzo.h"
+#include "pieceData.h"
 using namespace std;
 
 class board{
     public:
         int DIM=8;
-        int mat[8][8];    /*Matrice che indica i pezzi sulla scacchiera.
+        int mat[8][8];      /*Matrix for indication of the pieces on the board
 
-                            Per i bianchi sono indicati con
-                            1=pedoni
-                            2=torri
-                            3=cavalli
-                            4=alfieri
-                            5=regina
-                            6=re
+                            The white pieces are indicated with
+                            1=pawns
+                            2=rooks
+                            3=knights
+                            4=bishops
+                            5=queen
+                            6=king
 
                             Per i neri sono
-                            7=pedoni
-                            8=torri
-                            9=cavalli
-                            10=alfieri
-                            11=regina
-                            12=re*/
-        DatiPezzo pezzi[32];        //Oggetti che rappresentano ogni pezzo presente sulla scacchiera
+                            7=pawns
+                            8=rooks
+                            9=knights
+                            10=bishops
+                            11=queen
+                            12=king*/
+        pieceData pieces[32];        //Objects which represent every piece on the board
         //attr
         //methods
         board();
         void zero();
         void getBoard();
         void start();                               //Genera la disposizione iniziale della scacchiera
-        bool selectionControl(int riga, int col, int player);      //Verifica che la selzione del pezzo selezionato sia valida
+        bool selectionControl(int row, int col, int player);      //Verifica che la selzione del pezzo selezionato sia valida
 };
 
 board::board(){
@@ -181,53 +181,51 @@ void board::getBoard(){
 //----------------------
 
 void board::start(){
-    int c=0;
-    for(int i=7; i>=0; i--){                     //Ciclo per selezionare la riga
-        for(int j=0; j<8; j++){                 //Ciclo per selezionare la colonna
+    int c=0;                                    //Counter variable
+    for(int i=7; i>=0; i--){                    //Cycle to select the row
+        for(int j=0; j<8; j++){                 //Cycle to select the column
             switch(i){
-                case 0:{                        //Caso della riga più in alto, quella nera
+                case 0:{                        //Case of the highest row, the black one
                     if(j<=4) mat[i][j]=8+j;
                     else mat[i][j]=15-j;
                     break;
                 }
-                case 1:{                        //Caso della riga dei pedoni neri
+                case 1:{                        //Case of the row of the black pawns
                     mat[i][j]=7;
                     break;
                 }
-                case 6:{                        //Caso della riga dei pedoni bianchi
+                case 6:{                        //Case of the row of the white pawns
                     mat[i][j]=1;
                     break;
                 }
-                case 7:{                        //Caso della riga più in baso, quella bianca
+                case 7:{                        //Case of the lowest row, the white one
                     if(j<=4) mat[i][j]=2+j;
                     else mat[i][j]=9-j;
                     break;
-                }                               //Caso delle righe centrali, che sono vuote
-                default:{
+                }
+                default:{                       //Case of the central rows, the empty ones
                     mat[i][j]=0;
                 }
             }
-            if(mat[i][j]!=0){                 /*Se la casella viene riempita con un pezzo questo viene memorizzato
-                                                nell'array dei pezzi presenti sulla scacchiera*/
-                pezzi[c].tipo=mat[i][j];      //Memorizzazione del tipo
-                pezzi[c].riga=i;                //Memorizzazione della riga
-                pezzi[c].col=j;                 //Memorizzazione della colonna
-                c++;                            //Incremento della variabile contatore
+            if(mat[i][j]!=0){                 /*If the box id filled the piece is memorized in the array 
+                                                with the pieces on the board*/
+                pieces[c].type=mat[i][j];      //Memorise of the type
+                pieces[c].row=i;               //Memorise of the row
+                pieces[c].col=j;               //Memorise of the column
+                c++;                           //Increase of the counter variable
             }
         }
     }
 }
 
-bool board::selectionControl(int riga, int col, int player){
-    if(mat[riga][col]==0) return false;       //Se la casella selezionata è vuota viene invalidata la selezione
+bool board::selectionControl(int row, int col, int player){
+    if(mat[row][col]==0) return false;       //If the box is empty the selction is invalid
     else{
-        if(player==1 && mat[riga][col]>6) return false;   /*Se è il turno del giocatore 1(bianco) e la selezione
-                                                            supera il valore 6 (è stato selzionato un pezzo neropezzo nero) 
-                                                            viene invalidata*/
-        else if(player==2 && mat[riga][col]<7) return false;  /*Se è il turno del giocatore 2(nero) e la selezione
-                                                                è inferiore al valore 7 (è stato selzionato un pezzo bianco) 
-                                                                viene invalidata*/
-        else return true;           /*Se nessuna delle condizioni precedenti è rispettata vuol dire che è stato selezionato un pezzo 
-                                    del proprio colore e la selezione viene convalidata*/
+        if(player==1 && mat[row][col]>6) return false;   /*If it's the turn of the player 1 (white) and the selection
+                                                        value is higher than 6 (it's a black piece) it's invalid*/
+        else if(player==2 && mat[row][col]<7) return false; /*If it's the turn of the player 2 (black) and the selection
+                                                            value is lower than 6 (it's a white piece) it's invalid*/
+        else return true;           /*If no condition is respected the player has selcted one of it's pieces and the
+                                    selection is valid*/
     }
 }
