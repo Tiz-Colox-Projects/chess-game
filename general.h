@@ -8,7 +8,7 @@ using namespace std;
 void menu(){
     setcolor(10);
     system("cls");
-    cout<<"        CCCCCCCCCCCCChhhhhhh                                                                   "<<endl;
+    cout<<"        CCCCCCCCCCCCChhhhhhh                                                                   "<<endl;   //initial menu function
     Sleep(100);
     cout<<"     CCC::::::::::::Ch:::::h                                                                   "<<endl;
     Sleep(100);
@@ -45,13 +45,13 @@ void menu(){
 }
 
 void enter(){
-    cout<<endl<<"Press ENTER to continue"<<endl;
+    cout<<endl<<"Press ENTER to continue"<<endl;   //press enter to continue function
     getch();
 }
 
 void about(){
     system("cls");
-    cout<<"Chess game v0.1"<<endl;
+    cout<<"Chess game v0.1"<<endl;   //about print
     cout<<"Made by Tiz314, Colox343"<<endl;
     cout<<"Source code vailable on GitHub: https://github.com/Tiz314/Chess"<<endl;
     enter();
@@ -59,18 +59,18 @@ void about(){
 
 class gioc{
     public:
-        string name;
+        string name;   //gioc function for assign names to the players
         
         gioc();
         void insertName(string n);
         string getName(); 
 };
 
-gioc::gioc(){
-}
-void gioc::insertName(string n){
+gioc::gioc(){  //constructor for the gioc class
+} 
+void gioc::insertName(string n){   //name assignment
     name=n;
 }
-string gioc::getName(){
+string gioc::getName(){ //print the name
     return name;
 }
