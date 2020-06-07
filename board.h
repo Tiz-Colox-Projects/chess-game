@@ -5,6 +5,7 @@ using namespace std;
 
 class board{
     public:
+        //attr
         int DIM=8;
         int mat[8][8];      /*Matrix for indication of the pieces on the board
 
@@ -24,7 +25,6 @@ class board{
                             11=queen
                             12=king*/
         pieceData pieces[32];        //Objects which represent every piece on the board
-        //attr
         //methods
         board();
         void zero();
@@ -33,10 +33,10 @@ class board{
         bool selectionControl(int row, int col, int player);      //It verifies that the piece selection is valid
 };
 
-board::board(){
+board::board(){ //constructor for board class
 }
 
-void board::zero(){
+void board::zero(){      //formatting board content
     for(int i=0;i<DIM;i++){
         for(int c=0;c<DIM;c++){
             mat[i][c]=0;
@@ -44,10 +44,10 @@ void board::zero(){
     }
 }
 
-void board::getBoard(){ 
+void board::getBoard(){    //print of the board
 	char a=65;
     setcolor(3);
-    gotoxy(10,2); //start abc
+    gotoxy(10,2); //start abc print
     for(int i=0;i<=7;i++){
 		cout<<"+===========";
 	}
@@ -67,7 +67,7 @@ void board::getBoard(){
     }
 	cout<<"+"; //end abc
     int cont=6;
-    for(int i=DIM;i>0;i--){ //start num
+    for(int i=DIM;i>0;i--){ //start num print
         gotoxy(0,cont);
         cout<<"+=====+";
         cont++;
@@ -86,7 +86,7 @@ void board::getBoard(){
     cout<<"+=====+"; //end num
     cont=6;
     setcolor(7);
-    for(int i=0;i<DIM;i++){ //start board
+    for(int i=0;i<DIM;i++){ //start board print
         gotoxy(10,cont);
         cout<<"+===========+===========+===========+===========+===========+===========+===========+===========+";
 		cont++;
@@ -99,7 +99,7 @@ void board::getBoard(){
             cout<<"     ";
             switch(mat[i][c]){
                 case 1:{
-                    cout<<"P";
+                    cout<<"P";    //switch for print in each part of the board. the letter depends on the number in the board
                     break;
                 }
                 case 2:{
@@ -178,7 +178,7 @@ void board::getBoard(){
     setcolor(15);
 }
 
-//----------------------
+//----------------------//
 
 void board::start(){
     int c=0;                                    //Counter variable
