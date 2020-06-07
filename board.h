@@ -29,8 +29,8 @@ class board{
         board();
         void zero();
         void getBoard();
-        void start();                               //Genera la disposizione iniziale della scacchiera
-        bool selectionControl(int row, int col, int player);      //Verifica che la selzione del pezzo selezionato sia valida
+        void start();                               //It generates the initial arrangement on the board
+        bool selectionControl(int row, int col, int player);      //It verifies that the piece selection is valid
 };
 
 board::board(){
