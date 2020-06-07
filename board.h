@@ -16,7 +16,7 @@ class board{
                             5=queen
                             6=king
 
-                            Per i neri sono
+                            The white pieces are indicated with
                             7=pawns
                             8=rooks
                             9=knights
