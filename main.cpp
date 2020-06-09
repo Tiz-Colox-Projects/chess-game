@@ -8,13 +8,13 @@ int main(){
 	char sel;   //menu selection
 	bool check=true;  //bool value for the while
 	while(check){
-		menu();  //menu
+		menu();  
 		cin>>sel;   //selection input
 		switch(sel){
 			case '1':{
 				cout<<"You chose to play.";   //first case 
 				enter();
-				system("cls");
+				system("cls");  //or system("cls")
 				//play
 				gioc p1,p2;   //declaration of 2 names (objects)
 				string n;

@@ -1,5 +1,4 @@
 #include <iostream>
-#include "semigraf.h"
 #include "pieceData.h"
 using namespace std;
 
@@ -46,13 +45,13 @@ void board::zero(){      //formatting board content
 
 void board::getBoard(){    //print of the board
 	char a=65;
-    setcolor(3);
-    gotoxy(10,2); //start abc print
+    //start abc print
+    cout<<"         ";
     for(int i=0;i<=7;i++){
 		cout<<"+===========";
 	}
-	cout<<"+";
-    gotoxy(10,3);
+	cout<<"+"<<endl;
+    cout<<"         ";
 	for(int i=0;i<=7;i++){
 		cout<<"|     ";
 		for(int i=0;i<1;i++){
@@ -61,101 +60,72 @@ void board::getBoard(){    //print of the board
 		}
 	}
     cout<<"|";
-    gotoxy(10,4);
+    cout<<endl<<"         ";
     for(int i=0;i<=7;i++){
 		cout<<"+===========";
     }
-	cout<<"+"; //end abc
-    int cont=6;
-    for(int i=DIM;i>0;i--){ //start num print
-        gotoxy(0,cont);
-        cout<<"+=====+";
-        cont++;
-        gotoxy(0,cont);
-        cout<<"|     |";
-        cont++;
-        gotoxy(0,cont);
-        cout<<"|  "<<i<<"  |";
-        cont++;
-        gotoxy(0,cont);
-        cout<<"|     |";
-        cont++;
-
-    }
-    gotoxy(0,cont);
-    cout<<"+=====+"; //end num
-    cont=6;
-    setcolor(7);
-    for(int i=0;i<DIM;i++){ //start board print
-        gotoxy(10,cont);
-        cout<<"+===========+===========+===========+===========+===========+===========+===========+===========+";
-		cont++;
-        gotoxy(10,cont);
-        cout<<"|           |           |           |           |           |           |           |           |";
-        cont++;
-        gotoxy(10,cont);
-        cout<<"|";
+    cout<<"+";
+    cout<<endl;
+	//end abc
+    int f=8;
+    for(int i=0;i<DIM;i++){ //start num print and board
+        cout<<"+=====+  +===========+===========+===========+===========+===========+===========+===========+===========+"<<endl;
+        cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
+        cout<<"|  "<<f<<"  |  |";
+        f--;
         for(int c=0;c<DIM;c++){
             cout<<"     ";
             switch(mat[i][c]){
                 case 1:{
-                    cout<<"P";    //switch for print in each part of the board. the letter depends on the number in the board
+                    cout<<"\x1b[37;40mP\x1b[32;40m";    //switch for print in each part of the board. the letter depends on the number in the board
                     break;
                 }
                 case 2:{
-                    cout<<"R";
+                    cout<<"\x1b[37;40mR\x1b[32;40m";
                     break;
                 }
                 case 3:{
-                    cout<<"N";
+                    cout<<"\x1b[37;40mN\x1b[32;40m";
                     break;
                 }
                 case 4:{
-                    cout<<"B";
+                    cout<<"\x1b[37;40mB\x1b[32;40m";
                     break;
                 }
                 case 5:{
-                    cout<<"Q";
+                    cout<<"\x1b[37;40mQ\x1b[32;40m";
                     break;
                 }
                 case 6:{
-                    cout<<"K";
+                    cout<<"\x1b[37;40mK\x1b[32;40m";
                     break;
                 }
                 case 7:{
-                    setcolor(8);
-                    cout<<"P";
-                    setcolor(7);
+                    cout<<"\x1b[30;33mP\x1b[32;40m";
                     break;
                 }
                 case 8:{
-                    setcolor(8);
-                    cout<<"R";
-                    setcolor(7);
+                    cout<<"\x1b[30;33mR\x1b[32;40m";
                     break;
                 }
                 case 9:{
-                    setcolor(8);
-                    cout<<"N";
-                    setcolor(7);
+                    cout<<"\x1b[30;33mN\x1b[32;40m";
+                
                     break;
                 }
                 case 10:{
-                    setcolor(8);
-                    cout<<"B";
-                    setcolor(7);
+                    cout<<"\x1b[30;33mB\x1b[32;40m";
+                
                     break;
                 }
                 case 11:{
-                    setcolor(8);
-                    cout<<"Q";
-                    setcolor(7);
+                    cout<<"\x1b[30;33mQ\x1b[32;40m";
+                
                     break;
                 }
                 case 12:{
-                    setcolor(8);
-                    cout<<"K";
-                    setcolor(7);
+                    cout<<"\x1b[30;33mK\x1b[32;40m";
+                
                     break;
                 }
                 default:{
@@ -166,16 +136,14 @@ void board::getBoard(){    //print of the board
             }
             cout<<"     |";
         }
-        cont++;
-        gotoxy(10,cont);
-        cout<<"|           |           |           |           |           |           |           |           |";
-        cont++;
-	}
-    setcolor(7);
-    gotoxy(10,cont);
-	cout<<"+===========+===========+===========+===========+===========+===========+===========+===========+"; //end board
+        cout<<"\x1b[32;40m";
+        cout<<endl;
+        cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
+
+    }
+    cout<<"+=====+"; //end num and board
+	cout<<"  +===========+===========+===========+===========+===========+===========+===========+===========+"; //end board
     cout<<endl<<endl;
-    setcolor(15);
 }
 
 //----------------------//
