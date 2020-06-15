@@ -11,10 +11,10 @@ class pieceData{
         m is the arrangement of the pieces and the other are
         WKMove=variable of the white king movement
         WR1Move=variable of the white rook on the left movement
-        WR2Move=cariable of the white rook on the right movemenent
+        WR2Move=variable of the white rook on the right movemenent
         BKMove=variable of the black king movement
         BR1Move=variable of the black rook on the left movement
-        BR2Move=cariable of the black rook on the right movemenent*/
+        BR2Move=variable of the black rook on the right movemenent*/
 
         /*Functions to verify the moves of every piece
         row2 and col2 are the coordinates of the box and m in the arrangement of the pieces on the board*/
