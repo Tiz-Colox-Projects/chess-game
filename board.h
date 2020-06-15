@@ -23,6 +23,12 @@ class board{
                             10=bishops
                             11=queen
                             12=king*/
+        bool WKMove;        //Variable of the white king movement
+        bool WR1Move;       //Variable of the white rook on the left movement
+        bool WR2Move;       //Variable of the white rook on the right movemenent
+        bool BKMove;        //Variable of the black king movement
+        bool BR1Move;       //Variable of the black rook on the left movement
+        bool BR2Move;       //Variable of the black rook on the right movemenent
         pieceData pieces[32];        //Objects which represent every piece on the board
         //methods
         board();
@@ -184,6 +190,12 @@ void board::start(){
             }
         }
     }
+    WKMove=false;
+    WR1Move=false;
+    WR2Move=false;
+    BKMove=false;
+    BR1Move=false;
+    BR2Move=false;
 }
 
 bool board::selectionControl(int row, int col, int player){
