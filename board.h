@@ -30,12 +30,17 @@ class board{
         bool BR1Move;       //Variable of the black rook on the left movement
         bool BR2Move;       //Variable of the black rook on the right movemenent
         pieceData pieces[32];        //Objects which represent every piece on the board
+        string move;
         //methods
         board();
         void zero();
         void getBoard();
         void start();                               //It generates the initial arrangement on the board
         bool selectionControl(int row, int col, int player);      //It verifies that the piece selection is valid
+        bool checkMove(string move,int turn);
+        void changePos(string move);
+        int convertNum(char n);
+        int convertLett(char n);
 };
 
 board::board(){ //constructor for board class
@@ -83,54 +88,54 @@ void board::getBoard(){    //print of the board
             cout<<"     ";
             switch(mat[i][c]){
                 case 1:{
-                    cout<<"\x1b[37;40mP\x1b[32;40m";    //switch for print in each part of the board. the letter depends on the number in the board
+                    cout<<"\x1b[37mP\x1b[32m";    //switch for print in each part of the board. the letter depends on the number in the board
                     break;
                 }
                 case 2:{
-                    cout<<"\x1b[37;40mR\x1b[32;40m";
+                    cout<<"\x1b[37mR\x1b[32m";
                     break;
                 }
                 case 3:{
-                    cout<<"\x1b[37;40mN\x1b[32;40m";
+                    cout<<"\x1b[37mN\x1b[32m";
                     break;
                 }
                 case 4:{
-                    cout<<"\x1b[37;40mB\x1b[32;40m";
+                    cout<<"\x1b[37mB\x1b[32m";
                     break;
                 }
                 case 5:{
-                    cout<<"\x1b[37;40mQ\x1b[32;40m";
+                    cout<<"\x1b[37mQ\x1b[32m";
                     break;
                 }
                 case 6:{
-                    cout<<"\x1b[37;40mK\x1b[32;40m";
+                    cout<<"\x1b[37mK\x1b[32m";
                     break;
                 }
                 case 7:{
-                    cout<<"\x1b[30;33mP\x1b[32;40m";
+                    cout<<"\x1b[30;33mP\x1b[32m";
                     break;
                 }
                 case 8:{
-                    cout<<"\x1b[30;33mR\x1b[32;40m";
+                    cout<<"\x1b[30;33mR\x1b[32m";
                     break;
                 }
                 case 9:{
-                    cout<<"\x1b[30;33mN\x1b[32;40m";
+                    cout<<"\x1b[30;33mN\x1b[32m";
                 
                     break;
                 }
                 case 10:{
-                    cout<<"\x1b[30;33mB\x1b[32;40m";
+                    cout<<"\x1b[30;33mB\x1b[32m";
                 
                     break;
                 }
                 case 11:{
-                    cout<<"\x1b[30;33mQ\x1b[32;40m";
+                    cout<<"\x1b[30;33mQ\x1b[32m";
                 
                     break;
                 }
                 case 12:{
-                    cout<<"\x1b[30;33mK\x1b[32;40m";
+                    cout<<"\x1b[30;33mK\x1b[32m";
                 
                     break;
                 }
@@ -142,7 +147,7 @@ void board::getBoard(){    //print of the board
             }
             cout<<"     |";
         }
-        cout<<"\x1b[32;40m";
+        cout<<"\x1b[32m";
         cout<<endl;
         cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
 
@@ -208,4 +213,97 @@ bool board::selectionControl(int row, int col, int player){
         else return true;           /*If no condition is respected the player has selcted one of it's pieces and the
                                     selection is valid*/
     }
+}
+bool board::checkMove(string move,int turn){  //sintax input check
+    //string made of 8 characters
+    if(move.length() != 8){   //check for the length and the input structure
+        return false;
+    }
+    int startx,starty;
+    startx=convertLett(move[0]);
+    starty=convertNum(move[1]);
+    starty=8-starty;
+    if(turn%2!=0 && mat[starty][startx]>6) return false;
+    else if(turn%2==0 && mat[starty][startx]<7) return false;
+    if(mat[starty][startx]==0) return false; 
+    if(move[0] != 'a' && move[0] != 'b' && move[0] != 'c' && move[0] != 'd' && move[0] != 'e' && move[0] != 'f' && move[0] != 'g' && move[0] != 'h') return false;
+    if(move[1] != '1' && move[1] != '2' && move[1] != '3' && move[1] != '4' && move[1] != '5' && move[1] != '6' && move[1] != '7' && move[1] != '8') return false;
+    if(move[3] != 't' || move [4] !='o') return false;
+    if(move[6] != 'a' && move[6] != 'b' && move[6] != 'c' && move[6] != 'd' && move[6] != 'e' && move[6] != 'f' && move[6] != 'g' && move[6] != 'h') return false;
+    if(move[7] != '1' && move[7] != '2' && move[7] != '3' && move[7] != '4' && move[7] != '5' && move[7] != '6' && move[7] != '7' && move[7] != '8') return false;
+    else return true;
+}
+
+int board::convertNum(char n){
+    switch(n){
+        case '1':{
+            return 1;
+        }
+        case '2':{
+            return 2;
+        }
+        case '3':{
+            return 3;
+        }
+        case '4':{
+            return 4;
+        }
+        case '5':{
+            return 5;
+        }
+        case '6':{
+            return 6;
+        }
+        case '7':{
+            return 7;
+        }
+        case '8':{
+            return 8;
+        }
+        default:{
+            return -1;
+        }
+    }
+}
+int board::convertLett(char n){
+    switch(n){
+        case 'a':{
+            return 0;
+        }
+        case 'b':{
+            return 1;
+        }
+        case 'c':{
+            return 2;
+        }
+        case 'd':{
+            return 3;
+        }
+        case 'e':{
+            return 4;
+        }
+        case 'f':{
+            return 5;
+        }
+        case 'g':{
+            return 6;
+        }
+        case 'h':{
+            return 7;
+        }
+        default:{
+            return -1;
+        }
+    }
+}
+void board::changePos(string move){
+    int tempValue;
+    int startx,starty,endx,endy;
+    starty=8-convertNum(move[1]); //rewrite for real position
+    endy=8-convertNum(move[7]);
+    startx=convertLett(move[0]);
+    endx=convertLett(move[6]);
+    tempValue=mat[starty][startx];
+    mat[starty][startx]=0;
+    mat[endy][endx]=tempValue;
 }
