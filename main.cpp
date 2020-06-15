@@ -5,7 +5,7 @@
 #include "board.h"
 using namespace std;
 int main(){
-	bool game=true;
+	bool game=true; //bool for check the game
 	char sel;   //menu selection
 	bool check=true;  //bool value for the while
 	while(check){
@@ -30,7 +30,7 @@ int main(){
 				mat.start();   //filling the board with different pieces
 				mat.getBoard();
 				enter();
-				int turn=1;
+				int turn=1; //defining turn of each player
 				string name;
 				while(game){
 					if(turn%2!=0) name=p1.name;
@@ -38,7 +38,7 @@ int main(){
 					cout<<name<<", Insert your move using the following structure (a to b): ";
 					if(turn==1) getline(cin,mat.move);  //double input just for the first time (one input won't work)
 					getline(cin,mat.move);
-					if(mat.checkMove(mat.move,turn)){
+					if(mat.checkMove(mat.move,turn)){  //check and integration needed
 						turn++;
 						mat.changePos(mat.move);
 						system("cls");
