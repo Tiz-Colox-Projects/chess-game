@@ -62,7 +62,7 @@ void pieceData::setMoves(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bo
                     break;
                 }          
                 case 6:{                //Case of the white king
-                    possibleMoves[i][j]=(WR2Move);
+                    possibleMoves[i][j]=verMoveK(i,j,m,WKMove,WR1Move,WR2Move);
                     break;
                 }                   
                 case 12:{               //Case of the white king
