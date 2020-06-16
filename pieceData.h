@@ -16,6 +16,9 @@ class pieceData{
         BR1Move=variable of the black rook on the left movement
         BR2Move=variable of the black rook on the right movemenent*/
 
+        bool selectionControl(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bool BKMove, bool BR1Move, bool BR2Move, int i, int j);
+        //Function to select the right control of the move of the piece
+        
         /*Functions to verify the moves of every piece
         row2 and col2 are the coordinates of the box and m in the arrangement of the pieces on the board*/
         bool verMoveWP(int row2, int col2, int m[][8]);     //White pawns
@@ -32,46 +35,50 @@ pieceData::pieceData(){
 void pieceData::setMoves(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bool BKMove, bool BR1Move, bool BR2Move){
     for(int i=0; i<8; i++){
         for(int j=0; j<8; j++){
-            switch(type){                   //Selection of the type of the piece
+            if(selectionControl(m,WKMove,WR1Move,WR2Move,BKMove,WR1Move,WR2Move,i,j)) m[i][j]=true;
+            else m[i][j]=false;
+        }
+    }
+}
+bool pieceData::selectionControl(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bool BKMove, bool BR1Move, bool BR2Move, int i, int j){
+    switch(type){                   //Selection of the type of the piece
                 case 1:{                    //Case of the white pawns
-                    possibleMoves[i][j]=verMoveWP(i,j,m);
+                    return verMoveWP(i,j,m);
                     break;
                 }
                 case 7:{                    //Case of the black pawns
-                    possibleMoves[i][j]=verMoveBP(i,j,m);
+                    return verMoveBP(i,j,m);
                     break;
                 }
                 case 2:                     //Case of the rooks
                 case 8:{
-                    possibleMoves[i][j]=verMoveR(i,j,m,type);
+                    return verMoveR(i,j,m,type);
                     break;
                 }
                 case 3:                     //Case of the knights
                 case 9:{
-                    possibleMoves[i][j]=verMoveN(i,j,m);
+                    return verMoveN(i,j,m);
                     break;
                 }
                 case 4:                     //Case of the bishops
                 case 10:{
-                    possibleMoves[i][j]=verMoveB(i,j,m,type);
+                    return verMoveB(i,j,m,type);
                     break;
                 }
                 case 5:                     //Case of the queen
                 case 11:{
-                    possibleMoves[i][j]=verMoveQ(i,j,m);
+                    return verMoveQ(i,j,m);
                     break;
                 }          
                 case 6:{                //Case of the white king
-                    possibleMoves[i][j]=(WR2Move);
+                    return verMoveK(i,j,m,WKMove,WR1Move,WR2Move);
                     break;
                 }                   
                 case 12:{               //Case of the white king
-                    possibleMoves[i][j]=verMoveK(i,j,m,BKMove,BR1Move,BR2Move);
+                    return verMoveK(i,j,m,BKMove,BR1Move,BR2Move);
                     break;
                 }
             }
-        }
-    }
 }
 bool pieceData::verMoveWP(int row2, int col2, int m[][8]){
     if(row2==row && col2==col) return false;                        /*If the box is the same of the piece it can't move there and the

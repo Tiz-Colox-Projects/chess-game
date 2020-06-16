@@ -41,6 +41,7 @@ class board{
         void changePos(string move);
         int convertNum(char n);
         int convertLett(char n);
+        bool checkKing(int turn, int m[][8]);       //Function to verify the check to the king
 };
 
 board::board(){ //constructor for board class
@@ -306,4 +307,37 @@ void board::changePos(string move){
     tempValue=mat[starty][startx];
     mat[starty][startx]=0;
     mat[endy][endx]=tempValue;
+}
+bool board::checkKing(int turn, int m[][8]){
+    int rowK;
+    int colK;
+    if(turn%2==1){
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(m[i][j]==6){
+                    rowK=i;
+                    colK=j;
+                    break;
+                }
+            }
+        }
+        for(int i=16; i<32; i++){
+            if(pieces[i].selectionControl(mat,WKMove,WR1Move,WR2Move,BKMove,BR1Move,BR2Move,rowK,colK)) return false;
+        }
+    }
+    else{
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(m[i][j]==12){
+                    rowK=i;
+                    colK=j;
+                    break;
+                }
+            }
+        }
+        for(int i=0; i<16; i++){
+            if(pieces[i].selectionControl(mat,WKMove,WR1Move,WR2Move,BKMove,BR1Move,BR2Move,rowK,colK)) return false;
+        }
+    }
+    return true;
 }
