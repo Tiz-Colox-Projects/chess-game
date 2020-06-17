@@ -36,10 +36,9 @@ class board{
         void zero();
         void getBoard();
         void start();                               //It generates the initial arrangement on the board
-        bool selectionControl(int row, int col, int player);      //It verifies that the piece selection is valid
-        bool checkMove(string move,int turn);
+        bool checkMove(string move,int turn); //sintax and logic input control
         void changePos(string move);
-        int convertNum(char n);
+        int convertNum(char n); //transforming input in table positions
         int convertLett(char n);
 };
 
@@ -203,26 +202,18 @@ void board::start(){
     BR2Move=false;
 }
 
-bool board::selectionControl(int row, int col, int player){
-    if(mat[row][col]==0) return false;       //If the box is empty the selction is invalid
-    else{
-        if(player==1 && mat[row][col]>6) return false;   /*If it's the turn of the player 1 (white) and the selection
-                                                        value is higher than 6 (it's a black piece) it's invalid*/
-        else if(player==2 && mat[row][col]<7) return false; /*If it's the turn of the player 2 (black) and the selection
-                                                            value is lower than 6 (it's a white piece) it's invalid*/
-        else return true;           /*If no condition is respected the player has selcted one of it's pieces and the
-                                    selection is valid*/
-    }
-}
-bool board::checkMove(string move,int turn){  //sintax input check
+bool board::checkMove(string move,int turn){  //sintax input and logic check
     //string made of 8 characters
     if(move.length() != 8){   //check for the length and the input structure
         return false;
     }
-    int startx,starty;
+    int startx,starty,endx,endy;
     startx=convertLett(move[0]);
     starty=convertNum(move[1]);
+    endx=convertLett(move[6]);
+    endy=convertNum(move[7]);
     starty=8-starty;
+    endy=8-endy;
     if(turn%2!=0 && mat[starty][startx]>6) return false;
     else if(turn%2==0 && mat[starty][startx]<7) return false;
     if(mat[starty][startx]==0) return false; 
@@ -231,7 +222,14 @@ bool board::checkMove(string move,int turn){  //sintax input check
     if(move[3] != 't' || move [4] !='o') return false;
     if(move[6] != 'a' && move[6] != 'b' && move[6] != 'c' && move[6] != 'd' && move[6] != 'e' && move[6] != 'f' && move[6] != 'g' && move[6] != 'h') return false;
     if(move[7] != '1' && move[7] != '2' && move[7] != '3' && move[7] != '4' && move[7] != '5' && move[7] != '6' && move[7] != '7' && move[7] != '8') return false;
-    else return true;
+    //--------------
+    int i;
+    for(i=0;i<32;i++){
+        if(startx==pieces[i].col && starty==pieces[i].row) break;
+    }
+    pieces[i].setMoves(mat,WKMove,WR1Move,WR2Move,BKMove,BR1Move,BR2Move);
+    if(!pieces[i].possibleMoves[endy][endx]) return false;
+    return true;
 }
 
 int board::convertNum(char n){

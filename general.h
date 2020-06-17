@@ -32,7 +32,7 @@ void enter(){
 }
 
 void about(){
-    system("cls"); //or system cls
+    system("cls"); //or system clear
     cout<<"Chess game v0.1"<<endl;   //about print
     cout<<"Made by Tiz314, Colox343"<<endl;
     cout<<"Source code vailable on GitHub: https://github.com/Tiz314/Chess"<<endl;

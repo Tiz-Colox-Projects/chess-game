@@ -38,7 +38,7 @@ int main(){
 					cout<<name<<", Insert your move using the following structure (a to b): ";
 					if(turn==1) getline(cin,mat.move);  //double input just for the first time (one input won't work)
 					getline(cin,mat.move);
-					if(mat.checkMove(mat.move,turn)){  //check and integration needed
+					if(mat.checkMove(mat.move,turn)){  //----------sintax and logical check----------
 						turn++;
 						mat.changePos(mat.move);
 						system("cls");
