@@ -83,14 +83,17 @@ bool pieceData::verMoveWP(int row2, int col2, int m[][8]){
     else{
         if(col-col2==0){                                            //Case of the same column of the piece
             if(m[row-1][col]>0) return false;                       //If the next box in vertical is occupied the pawn can't move
-            else if(row2-row==2 && (m[row2][col2]>0 || row!=6)) return false;   /*If the box is 2 spaces upper and there's another
-                                                                     piece or the pawn is not in his beginning position the returned
-                                                                     value is false*/
-            else if(row2-row>2) return false;                       /*If the box is more than 2 spaces upper the returned value
+            else if(row==6){                                       //Case of the beginning row
+                if(row2-row==2 && m[row2][col2]>0) return false;   /*If the box is 2 spaces upper and there's another
+                                                                     piece the returned value is false*/
+                else if(row2-row>2) return false;                   /*If the box is more than 2 spaces upper the returned value
+                                                                    is false*/
+            }                                                       
+            else if(row2-row>1) return false;                       /*If the box is more than 1 spaces upper the returned value
                                                                     is false*/
         }
-        else if(m[row2][col2]==0 || row2-row!=1) return false;      /*If the pawn doesn't move diagonally or there isn't an enemy 
-                                                                    piece the returned value is false*/
+        else if((m[row2][col2]>0 && m[row2][col2]<=6) || row2-row!=1) return false;      
+        //If the pawn doesn't move diagonally or there isn't an enemy piece the returned value is false
     }
     return true;                                //If no condition is respected the pawn can move to the box
 }
@@ -104,13 +107,14 @@ bool pieceData::verMoveBP(int row2, int col2, int m[][8]){
     else{
         if(col-col2==0){                                            //Case of the same column of the piece
             if(m[row+1][col]>0) return false;                       //If the next box in vertical is occupied the pawn can't move
-            else if(row-row2==2 && (m[row2][col2]>0 || row!=1)) return false;   /*If the box is 2 spaces lower and there's another
-                                                                     piece or the pawn is not in his beginning position the returned
-                                                                     value is false*/
-            else if(row-row2>2) return false;                       /*If the box is more than 2 spaces lower the returned value
-                                                                    is false*/
+            else if(row==1){                                             //Case of the beginning row
+                if(row-row2==2 && m[row2][col2]>0) return false;   /*If the box is 2 spaces lower and there's another
+                                                                        piece the returned value is false*/
+                else if(row-row2>2) return false;                       /*If the box is more than 2 spaces lower the returned value
+                                                                        is false*/
+            }
         }
-        else if(m[row2][col2]==0 || row-row2!=1) return false;      /*If the pawn doesn't move diagonally or there isn't an enemy 
+        else if(m[row2][col2]>6 || row-row2!=1) return false;      /*If the pawn doesn't move diagonally or there isn't an enemy 
                                                                     piece the returned value is false*/
     }
     return true;                                //If no condition is respected the pawn can move to the box
@@ -150,7 +154,7 @@ bool pieceData::verMoveR(int row2, int col2, int m[][8], int t){
             }
         }
         else{                       //Case of a box on the right
-            for(int i=1; col+i>=col2; i++){
+            for(int i=1; col+i<=col2; i++){
                 if(col+i==col2){
                     if(t==2 && (m[row][col+i]<=6 && m[row][col+i]>0)) return false;
                     else if(t==8 && m[row][col+i]>6) return false;
@@ -186,7 +190,7 @@ bool pieceData::verMoveB(int row2, int col2, int m[][8], int t){
                 for(int i=1; row-i>=row2; i++){     //Cycle for the controls
                     if(row-i==row2){
                         if(t==4 && (m[row-i][col-i]<=6 && m[row-i][col-i]>0)) return false;
-                        else if(t==10 && m[row-i][col]>6) return false;
+                        else if(t==10 && m[row-i][col-i]>6) return false;
                     }                   /*If the box is the selected one and there's a piece of the same color the returned value
                                         is false*/
                     else if(m[row-i][col-i]!=0) return false;     /*If it's not the selcted box and there's another piece in the returned 
@@ -197,7 +201,7 @@ bool pieceData::verMoveB(int row2, int col2, int m[][8], int t){
                 for(int i=1; row-i>=row2; i++){     //Cycle for the controls
                     if(row-i==row2){
                         if(t==4 && (m[row-i][col+i]<=6 && m[row-i][col+i]>0)) return false;
-                        else if(t==10 && m[row-i][col]>6) return false;
+                        else if(t==10 && m[row-i][col+i]>6) return false;
                     }                   /*If the box is the selected one and there's a piece of the same color the returned value
                                         is false*/
                     else if(m[row-i][col+i]!=0) return false;     /*If it's not the selcted box and there's another piece in the returned 
@@ -207,10 +211,10 @@ bool pieceData::verMoveB(int row2, int col2, int m[][8], int t){
         }
         else{                                       //Case of a lower row
             if(col2<col){                           //Case of a column on the left
-                for(int i=1; row+i>=row2; i++){     //Cycle for the controls
+                for(int i=1; row+i<=row2; i++){     //Cycle for the controls
                     if(row+i==row2){
                         if(t==4 && (m[row+i][col-i]<=6 && m[row+i][col-i]>0)) return false;
-                        else if(t==10 && m[row-i][col]>6) return false;
+                        else if(t==10 && m[row+i][col-i]>6) return false;
                     }                   /*If the box is the selected one and there's a piece of the same color the returned value
                                         is false*/
                     else if(m[row+i][col-i]!=0) return false;     /*If it's not the selcted box and there's another piece in the returned 
@@ -218,7 +222,7 @@ bool pieceData::verMoveB(int row2, int col2, int m[][8], int t){
                 }
             }
             else{                                   //Case of a column on the right
-                for(int i=1; row+i>=row2; i++){     //Cycle for the controls
+                for(int i=1; row+i<=row2; i++){     //Cycle for the controls
                     if(row+i==row2){
                         if(t==4 && (m[row+i][col+i]<=6 && m[row+i][col+i]>0)) return false;
                         else if(t==10 && m[row-i][col]>6) return false;
@@ -240,26 +244,31 @@ bool pieceData::verMoveQ(int row2, int col2, int m[][8]){
 bool pieceData::verMoveK(int row2, int col2, int m[][8], bool KMove, bool R1Move, bool R2Move){
     if(row==row2 && col==col2) return false;        //IF the box is the same of the pice's one it's invalid
     else if(!KMove){                                //Case when the king has never moved
-        if(col-col2==2){                            //First case of the castling
+        if(col-col2==-2){                            //First case of the castling
             if(R2Move) return false;                //If the rook has previously moved the returned value is false
             else{
-                for(int i=1; col+i>=col2; i++){          //If there's a piece through the king and the rook the move is invalid
+                for(int i=1; col+i<=col2; i++){          //If there's a piece through the king and the rook the move is invalid
                     if(m[row][col-i]!=0) return false;
                 }
             }
         }
-        else if(col-col2==-2){                      //The same of the previously case
+        else if(col-col2==2){                      //The same of the previously case
             if(R1Move) return false;
             else{
-                for(int i=1; col+i<=col2; i++){
+                for(int i=1; col+i>=col2; i++){
                     if(m[row][col+i]!=0) return false;
                 }
             }
         }
         else if((row-row2<-1 || row-row2>1) || (col-col2<-1 || col-col2>1)) return false;
-        //Else if the king moved more than 1 box in a direction the move is invalid   
+        //Else if the king moved more than 1 box in a direction the move is invalid
+        else{
+            if(type==6 && (m[row2][col2]>0 && m[row2][col2]<6)) return false;
+            else if(type==12 && m[row2][col2]>6) return false;
+        }
+        //Else if on the box there's a piece of the same color the returned value is false
     }
-    else if((row-row2>1 || row-row2<-1) || (row-row2>1 || row-row2<-1)) return false;
+    else if((row-row2>1 || row-row2<-1) || (col-col2<-1 || col-col2>1)) return false;
     //Else if the king moved more than 1 box in a direction the move is invalid   
     else{
         if(type==6 && (m[row2][col2]>0 && m[row2][col2]<6)) return false;
