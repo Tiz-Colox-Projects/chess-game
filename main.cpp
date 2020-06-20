@@ -15,7 +15,7 @@ int main(){
 			case '1':{
 				cout<<"You chose to play.";   //first case 
 				enter();
-				system("clear");  //or system("cls")
+				system("clear");  //or system("clear")
 				//play
 				gioc p1,p2;   //declaration of 2 names (objects)
 				string n;
@@ -32,19 +32,21 @@ int main(){
 				enter();
 				int turn=1; //defining turn of each player
 				string name;
+				bool firstMove=true;
 				while(game){
 					if(turn%2!=0) name=p1.name;
 					else name=p2.name;
 					cout<<name<<", Insert your move using the following structure (a to b): ";
-					if(turn==1) getline(cin,mat.move);  //double input just for the first time (one input won't work)
+					if(turn==1 && firstMove) getline(cin,mat.move);  //double input just for the first time (one input won't work)
 					getline(cin,mat.move);
 					if(mat.checkMove(mat.move,turn)){  //----------sintax and logical check----------
 						turn++;
 						mat.changePos(mat.move);
-						system("cls");
+						system("clear");
 						mat.getBoard();
 					}else{
 						cout<<"Invalid option."<<endl;
+						firstMove=false;
 					}
 				}
 				break;
