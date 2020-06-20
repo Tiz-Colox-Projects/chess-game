@@ -3,7 +3,7 @@
 using namespace std;
 
 void menu(){
-    system("cls");
+    system("clear");
     cout<<" \x1b[32m       CCCCCCCCCCCCChhhhhhh                                                                   "<<endl;   //initial menu function
     cout<<"     CCC::::::::::::Ch:::::h                                                                   "<<endl;
     cout<<"   CC:::::::::::::::Ch:::::h                                                                   "<<endl;
@@ -21,21 +21,41 @@ void menu(){
     cout<<"     CCC::::::::::::C h:::::h     h:::::h  ee:::::::::::::e   s:::::::::::ss   s:::::::::::ss  "<<endl;
     cout<<"        CCCCCCCCCCCCC hhhhhhh     hhhhhhh    eeeeeeeeeeeeee    sssssssssss      sssssssssss    "<<endl<<endl;
     cout<<"Welcome to Chess! Please, select an option: "<<endl;
-    cout<<"1- Play \n2- About \n3- Exit"<<endl;
+    cout<<"1- New Game \n2- About \n3- Exit"<<endl;
 }
 
 void enter(){
-    //cout<<endl<<"Press ENTER to continue"<<endl;   //press enter to continue function
+    cout<<endl<<"Press ENTER to continue"<<endl;   //press enter to continue function
     
     cout<<endl;
-    system("pause"); // or system pause
+    system("read"); // or system pause
 }
 
 void about(){
-    system("cls"); //or system clear
+    system("clear"); //or system clear
     cout<<"Chess game v0.1"<<endl;   //about print
     cout<<"Made by Tiz314, Colox343"<<endl;
     cout<<"Source code vailable on GitHub: https://github.com/Tiz314/Chess"<<endl;
+    enter();
+}
+
+void finalMsg(string winner){
+    system("clear");
+    cout<<"+=================+"<<endl;
+    cout<<"|      .::.       |"<<endl;
+    cout<<"|      _::_       |"<<endl;
+    cout<<"|    _|____|_     |"<<endl;
+    cout<<"|    |      |     |"<<endl;
+    cout<<"|     |____|      |"<<endl;
+    cout<<"|     (____)      |"<<endl;  
+    cout<<"|      |  |       |"<<endl;
+    cout<<"|      |__|       |"<<endl;
+    cout<<"|     |    |      |"<<endl;
+    cout<<"|    (______)     |"<<endl;
+    cout<<"|   (________)    |"<<endl;
+    cout<<"|   |________|    |"<<endl;
+    cout<<"+=================+"<<endl<<endl;
+    cout<<winner<<" is the winner!"<<endl<<endl;
     enter();
 }
 

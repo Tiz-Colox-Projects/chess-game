@@ -48,6 +48,7 @@ int main(){
 						cout<<"Invalid option."<<endl;
 						firstMove=false;
 					}
+				//insert winner name and call function
 				}
 				break;
 			}
