@@ -15,7 +15,7 @@ int main(){
 			case '1':{
 				cout<<"You chose to play.";   //first case 
 				enter();
-				system("cls");  //or system("cls")
+				system("clear");  //or system("cls")
 				//play
 				gioc p1,p2;   //declaration of 2 names (objects)
 				string n;
