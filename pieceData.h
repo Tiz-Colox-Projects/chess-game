@@ -136,7 +136,7 @@ bool pieceData::verMoveR(int row2, int col2, int m[][8], int t){
             }
         }
         else if(row2>row){          //Case of a lower box
-            for(int i=1; row+i>=row2; i++){
+            for(int i=1; row+i<=row2; i++){
                 if(row+i==row2){
                     if(t==2 && (m[row+i][col]<=6 && m[row+i][col]>0)) return false;
                     else if(t==8 && m[row+i][col]>6) return false;
