@@ -81,6 +81,7 @@ void board::getBoard(){    //print of the board
     for(int i=0;i<DIM;i++){ //start num print and board
         cout<<"+=====+  +===========+===========+===========+===========+===========+===========+===========+===========+"<<endl;
         cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
+        cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
         cout<<"|  "<<f<<"  |  |";
         f--;
         for(int c=0;c<DIM;c++){
@@ -149,7 +150,7 @@ void board::getBoard(){    //print of the board
         cout<<"\x1b[32m";
         cout<<endl;
         cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
-
+        cout<<"|     |  |           |           |           |           |           |           |           |           |"<<endl;
     }
     cout<<"+=====+"; //end num and board
 	cout<<"  +===========+===========+===========+===========+===========+===========+===========+===========+"; //end board
