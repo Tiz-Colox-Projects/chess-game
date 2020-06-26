@@ -25,11 +25,11 @@ int main(){
 				cout<<"please, insert player 2 (black) name: ";
 				cin>>n;
 				p2.insertName(n);
+				system("clear");
 				board mat;  //declaration of the board
 				mat.zero(); 
 				mat.start();   //filling the board with different pieces
 				mat.getBoard();
-				enter();
 				int turn=1; //defining turn of each player
 				string name;
 				bool firstMove=true;
