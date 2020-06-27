@@ -33,6 +33,9 @@ void pieceData::setMoves(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bo
     for(int i=0; i<8; i++){
         for(int j=0; j<8; j++){
             switch(type){                   //Selection of the type of the piece
+                case 0:{
+                    break;
+                }
                 case 1:{                    //Case of the white pawns
                     possibleMoves[i][j]=verMoveWP(i,j,m);
                     break;
@@ -141,7 +144,7 @@ bool pieceData::verMoveR(int row2, int col2, int m[][8], int t){
                     if(t==2 && (m[row+i][col]<=6 && m[row+i][col]>0)) return false;
                     else if(t==8 && m[row+i][col]>6) return false;
                 }
-                else if(m[row-i][col]!=0) return false;
+                else if(m[row+i][col]!=0) return false;
             }
         }
         else if(col2<col){          //Case of a box on the left

@@ -305,4 +305,16 @@ void board::changePos(string move){
     tempValue=mat[starty][startx];
     mat[starty][startx]=0;
     mat[endy][endx]=tempValue;
+    for(int i=0; i<32; i++){            //If there's a piece on the final box it's erased from the board
+        if(pieces[i].row==endy && pieces[i].col==endx){
+            pieces[i].row=-1;
+            pieces[i].col=-1;
+        }
+    }
+    for(int i=0; i<32; i++){            //The position of the moved piece is rewritten
+        if(pieces[i].row==starty && pieces[i].col==startx){
+            pieces[i].row=endy;
+            pieces[i].col=endx;
+        }
+    }
 }
