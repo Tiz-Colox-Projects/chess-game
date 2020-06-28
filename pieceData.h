@@ -77,30 +77,32 @@ void pieceData::setMoves(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bo
     }
 }
 bool pieceData::verMoveWP(int row2, int col2, int m[][8]){
+    
     if(row2==row && col2==col) return false;                        /*If the box is the same of the piece it can't move there and the
                                                                     returned value is false*/
     else if(m[row2][col2]>=1 && m[row2][col2]<=6) return false;     /*If the box's value is beetween 1 and 6 (there's a white piece) 
                                                                     the returned value is false*/
-    else if(col-col2<-1 || col-col2>1) return false;                /*If the box is more than 2 spaces distant horizontally the
-                                                                    returned value is false*/
-    else{
-        if(col-col2==0){                                            //Case of the same column of the piece
-            if(m[row-1][col]>0) return false;                       //If the next box in vertical is occupied the pawn can't move
+    else if(col-col2<-1 || col-col2>1) return false;            /*If the box is more than 2 spaces distant horizontally the
+                                                                    //returned value is false*/
+    else {
+        if(col==col2){                                            //Case of the same column of the piece
+            if(row!=6 && m[row2-1][col]>0) return false;                       //If the next box in vertical is occupied the pawn can't move
             else if(row==6){                                       //Case of the beginning row
-                if(row2-row==2 && m[row2][col2]>0) return false;   /*If the box is 2 spaces upper and there's another
+                if(row-row2==2 && m[row2][col2]>0) return false;   /*If the box is 2 spaces upper and there's another
                                                                      piece the returned value is false*/
-                else if(row2-row>2) return false;                   /*If the box is more than 2 spaces upper the returned value
+                else if(row-row2>2) return false;                   /*If the box is more than 2 spaces upper the returned value
                                                                     is false*/
             }                                                       
-            else if(row2-row>1) return false;                       /*If the box is more than 1 spaces upper the returned value
+            else if(row-row2>1) return false;                       /*If the box is more than 1 spaces upper the returned value
                                                                     is false*/
         }
-        else if((m[row2][col2]>0 && m[row2][col2]<=6) || row2-row!=1) return false;      
+        else if((m[row2][col2]>=0 && m[row2][col2]<=6) || row-row2!=1) return false;      
         //If the pawn doesn't move diagonally or there isn't an enemy piece the returned value is false
     }
     return true;                                //If no condition is respected the pawn can move to the box
 }
 bool pieceData::verMoveBP(int row2, int col2, int m[][8]){
+    if(row2-row>1 && row!=1) return false;
     if(row2==row && col2==col) return false;                        /*If the box is the same of the piece it can't move there and the
                                                                     returned value is false*/
     else if(m[row2][col2]>6) return false;                          /*If the box's value is higher than 6 (there's a black piece) 
@@ -111,13 +113,13 @@ bool pieceData::verMoveBP(int row2, int col2, int m[][8]){
         if(col-col2==0){                                            //Case of the same column of the piece
             if(m[row+1][col]>0) return false;                       //If the next box in vertical is occupied the pawn can't move
             else if(row==1){                                             //Case of the beginning row
-                if(row-row2==2 && m[row2][col2]>0) return false;   /*If the box is 2 spaces lower and there's another
+                if(row2-row==2 && m[row2][col2]>0) return false;   /*If the box is 2 spaces lower and there's another
                                                                         piece the returned value is false*/
-                else if(row-row2>2) return false;                       /*If the box is more than 2 spaces lower the returned value
+                else if(row2-row>2) return false;                       /*If the box is more than 2 spaces lower the returned value
                                                                         is false*/
             }
         }
-        else if(m[row2][col2]>6 || row-row2!=1) return false;      /*If the pawn doesn't move diagonally or there isn't an enemy 
+        else if( m[row2][col2]==0 || m[row2][col2]>6 || row2-row!=1) return false;      /*If the pawn doesn't move diagonally or there isn't an enemy 
                                                                     piece the returned value is false*/
     }
     return true;                                //If no condition is respected the pawn can move to the box
