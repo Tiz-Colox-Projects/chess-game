@@ -36,10 +36,13 @@ class board{
         void zero();
         void getBoard();
         void start();                               //It generates the initial arrangement on the board
-        bool checkMove(string move,int turn); //sintax and logic input control
+        bool checkMove(string move,int turn,bool underCheck); //sintax and logic input control
         void changePos(string move);
         int convertNum(char n); //transforming input in table positions
         int convertLett(char n);
+        void getPieces(pieceData pieces[]);
+        int check4check(pieceData pieces[],int gioc,int turn);
+        void checkPt2(string name1, string name2, board mat,int gioc,int turn,bool &check,bool &underCheck);
 };
 
 board::board(){ //constructor for board class
@@ -202,37 +205,6 @@ void board::start(){
     BR1Move=false;
     BR2Move=false;
 }
-
-bool board::checkMove(string move,int turn){  //sintax input and logic check
-    //string made of 8 characters
-    if(move.length() != 8){   //check for the length and the input structure
-        return false;
-    }
-    int startx,starty,endx,endy;
-    startx=convertLett(move[0]);
-    starty=convertNum(move[1]);
-    endx=convertLett(move[6]);
-    endy=convertNum(move[7]);
-    starty=8-starty;
-    endy=8-endy;
-    if(turn%2!=0 && mat[starty][startx]>6) return false;
-    else if(turn%2==0 && mat[starty][startx]<7) return false;
-    if(mat[starty][startx]==0) return false; 
-    if(move[0] != 'a' && move[0] != 'b' && move[0] != 'c' && move[0] != 'd' && move[0] != 'e' && move[0] != 'f' && move[0] != 'g' && move[0] != 'h') return false;
-    if(move[1] != '1' && move[1] != '2' && move[1] != '3' && move[1] != '4' && move[1] != '5' && move[1] != '6' && move[1] != '7' && move[1] != '8') return false;
-    if(move[3] != 't' || move [4] !='o') return false;
-    if(move[6] != 'a' && move[6] != 'b' && move[6] != 'c' && move[6] != 'd' && move[6] != 'e' && move[6] != 'f' && move[6] != 'g' && move[6] != 'h') return false;
-    if(move[7] != '1' && move[7] != '2' && move[7] != '3' && move[7] != '4' && move[7] != '5' && move[7] != '6' && move[7] != '7' && move[7] != '8') return false;
-    //--------------
-    int i;
-    for(i=0;i<32;i++){
-        if(startx==pieces[i].col && starty==pieces[i].row) break;
-    }
-    pieces[i].setMoves(mat,WKMove,WR1Move,WR2Move,BKMove,BR1Move,BR2Move);
-    if(!pieces[i].possibleMoves[endy][endx]) return false;
-    return true;
-}
-
 int board::convertNum(char n){
     switch(n){
         case '1':{
@@ -295,6 +267,40 @@ int board::convertLett(char n){
         }
     }
 }
+bool board::checkMove(string move,int turn,bool underCheck){  //sintax input and logic check
+    int kingPos;
+    if(turn%2!=0) kingPos=28;
+    else kingPos=4;
+    //string made of 8 characters
+    if(move.length() != 8){   //check for the length and the input structure
+        return false;
+    }
+    int startx,starty,endx,endy;
+    startx=convertLett(move[0]);
+    starty=convertNum(move[1]);
+    endx=convertLett(move[6]);
+    endy=convertNum(move[7]);
+    starty=8-starty;
+    endy=8-endy;
+    if(turn%2!=0 && mat[starty][startx]>6) return false;
+    else if(turn%2==0 && mat[starty][startx]<7) return false;
+    if(mat[starty][startx]==0) return false; 
+    if(underCheck && (convertLett(move[0])!=pieces[kingPos].col) && (convertNum(move[1]!=pieces[kingPos].row))) return false;
+    if(move[0] != 'a' && move[0] != 'b' && move[0] != 'c' && move[0] != 'd' && move[0] != 'e' && move[0] != 'f' && move[0] != 'g' && move[0] != 'h') return false;
+    if(move[1] != '1' && move[1] != '2' && move[1] != '3' && move[1] != '4' && move[1] != '5' && move[1] != '6' && move[1] != '7' && move[1] != '8') return false;
+    if(move[3] != 't' || move [4] !='o') return false;
+    if(move[6] != 'a' && move[6] != 'b' && move[6] != 'c' && move[6] != 'd' && move[6] != 'e' && move[6] != 'f' && move[6] != 'g' && move[6] != 'h') return false;
+    if(move[7] != '1' && move[7] != '2' && move[7] != '3' && move[7] != '4' && move[7] != '5' && move[7] != '6' && move[7] != '7' && move[7] != '8') return false;
+    //--------------
+    int i;
+    for(i=0;i<32;i++){
+        if(startx==pieces[i].col && starty==pieces[i].row) break;
+    }
+    pieces[i].setMoves(mat,WKMove,WR1Move,WR2Move,BKMove,BR1Move,BR2Move);
+    if(!pieces[i].possibleMoves[endy][endx]) return false;
+    return true;
+}
+
 void board::changePos(string move){
     int tempValue;
     int startx,starty,endx,endy;
@@ -317,4 +323,46 @@ void board::changePos(string move){
             pieces[i].col=endx;
         }
     }
+}
+
+void getPieces(pieceData pieces[]){ //test function
+    int e=0;
+    for(int i=0;i<4;i++){
+        for(int c=0;c<8;c++){
+            cout<<pieces[e].type;
+            e++;
+        }
+        cout<<endl;
+    }
+}
+
+int check4check(pieceData pieces[],int gioc,int turn){ //first fuction for under check/checkmate checking
+    int kingPos; //position of the king. useful for checking
+    if(turn%2!=0) kingPos=28;
+    else kingPos=4; //defining the value
+    //cout<<pieces[gioc].type<<endl<<pieces[gioc].row<<endl<<pieces[gioc].col<<endl<<endl;
+    //return 2;
+    //case 2: (checkmate)
+    //if(pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col+1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row][pieces[kingPos].col+1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col+1]==0) return 2;
+    //case 1: (just under check)
+
+}
+
+void checkPt2(string name1,string name2, board mat,int gioc,int turn,bool &check,bool &underCheck){ //second fuction for under check/checkmate checking
+    switch(check4check(mat.pieces,gioc,turn)){ //depending on the value:
+		case 1:{
+		    //black/white under check
+            underCheck=true;
+            cout<<endl<<name1<<" is under check!"<<endl;
+            turn--;
+			break;
+        }
+		case 2:{
+		    //white/black checkmate
+            check=false;
+            system("clear");
+            finalMsg(name2);
+		    break;
+		}
+	}
 }

@@ -27,7 +27,6 @@ class pieceData{
         bool verMoveK(int row2, int col2, int m[][8], bool KMove, bool R1Move, bool R2Move);      //King
 };
 pieceData::pieceData(){
-
 }
 void pieceData::setMoves(int m[][8], bool WKMove, bool WR1Move, bool WR2Move, bool BKMove, bool BR1Move, bool BR2Move){
     for(int i=0; i<8; i++){
@@ -253,7 +252,7 @@ bool pieceData::verMoveK(int row2, int col2, int m[][8], bool KMove, bool R1Move
             if(R2Move) return false;                //If the rook has previously moved the returned value is false
             else{
                 for(int i=1; col+i<=col2; i++){          //If there's a piece through the king and the rook the move is invalid
-                    if(m[row][col-i]!=0) return false;
+                    if(m[row][col-i]!=0) return false;  
                 }
             }
         }

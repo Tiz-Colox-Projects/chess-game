@@ -8,8 +8,10 @@ int main(){
 	bool game=true; //bool for check the game
 	char sel;   //menu selection
 	bool check=true;  //bool value for the while
+	bool underCheck=false;
 	while(check){
 		menu();  
+		game=true;
 		cin>>sel;   //selection input
 		switch(sel){
 			case '1':{
@@ -37,13 +39,18 @@ int main(){
 					if(turn%2!=0) name=p1.name;
 					else name=p2.name;
 					cout<<name<<", Insert your move using the following structure (a to b): ";
-					if(turn==1 && firstMove) getline(cin,mat.move);  //double input just for the first time (one input won't work)
+					if(turn==1 && firstMove) getline(cin,mat.move);  //double input just for the first time (one input won't work :/ )
 					getline(cin,mat.move);
-					if(mat.checkMove(mat.move,turn)){  //----------sintax and logical check----------
-						turn++;
+					if(mat.checkMove(mat.move,turn,underCheck)){  //----------sintax and logical check----------
 						mat.changePos(mat.move);
 						system("clear");
 						mat.getBoard();
+						/*cout<<endl<<endl;
+						getPieces(mat.pieces);
+						cout<<endl<<endl;*/
+						if(turn%2!=0) checkPt2(p2.name,p1.name,mat,28,turn,game,underCheck); //under check/checkmate check
+						else checkPt2(p1.name,p2.name,mat,4,turn,game,underCheck);
+						turn++;
 					}else{
 						cout<<"Invalid option."<<endl;
 						firstMove=false;
