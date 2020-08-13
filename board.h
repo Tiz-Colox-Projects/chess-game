@@ -337,15 +337,16 @@ void getPieces(pieceData pieces[]){ //test function
 }
 
 int check4check(pieceData pieces[],int gioc,int turn){ //first fuction for under check/checkmate checking
+    return 0;
     int kingPos; //position of the king. useful for checking
     if(turn%2!=0) kingPos=28;
     else kingPos=4; //defining the value
+    //if(pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col+1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row][pieces[kingPos].col+1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col+1]==0) return 2;
     //cout<<pieces[gioc].type<<endl<<pieces[gioc].row<<endl<<pieces[gioc].col<<endl<<endl;
     //return 2;
     //case 2: (checkmate)
-    //if(pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row+1][pieces[kingPos].col+1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row][pieces[kingPos].col+1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col-1]==0 && pieces[kingPos].possibleMoves[pieces[kingPos].row-1][pieces[kingPos].col+1]==0) return 2;
     //case 1: (just under check)
-
+    //algorithm needed!
 }
 
 void checkPt2(string name1,string name2, board mat,int gioc,int turn,bool &check,bool &underCheck){ //second fuction for under check/checkmate checking
@@ -360,7 +361,7 @@ void checkPt2(string name1,string name2, board mat,int gioc,int turn,bool &check
 		case 2:{
 		    //white/black checkmate
             check=false;
-            system("clear");
+            system("cls");
             finalMsg(name2);
 		    break;
 		}

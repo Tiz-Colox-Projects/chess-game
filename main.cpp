@@ -2,7 +2,7 @@
 //By Tiz314, Colox343
 #include <iostream>
 #include "general.h"
-#include "board.h"
+#include "board.h" 
 using namespace std;
 int main(){
 	bool game=true; //bool for check the game
@@ -17,7 +17,7 @@ int main(){
 			case '1':{
 				cout<<"You chose to play.";   //first case 
 				enter();
-				system("clear");  //or system("clear")
+				system("cls");  //or system("cls")
 				//play
 				gioc p1,p2;   //declaration of 2 names (objects)
 				string n;
@@ -27,7 +27,7 @@ int main(){
 				cout<<"please, insert player 2 (black) name: ";
 				cin>>n;
 				p2.insertName(n);
-				system("clear");
+				system("cls");
 				board mat;  //declaration of the board
 				mat.zero(); 
 				mat.start();   //filling the board with different pieces
@@ -43,7 +43,7 @@ int main(){
 					getline(cin,mat.move);
 					if(mat.checkMove(mat.move,turn,underCheck)){  //----------sintax and logical check----------
 						mat.changePos(mat.move);
-						system("clear");
+						system("cls");
 						mat.getBoard();
 						/*cout<<endl<<endl;
 						getPieces(mat.pieces);
