@@ -3,7 +3,7 @@
 using namespace std;
 
 void menu(){
-    system("clear");
+    system("cls");
     cout<<" \x1b[32m       CCCCCCCCCCCCChhhhhhh                                                                   "<<endl;   //initial menu function
     cout<<"     CCC::::::::::::Ch:::::h                                                                   "<<endl;
     cout<<"   CC:::::::::::::::Ch:::::h                                                                   "<<endl;
@@ -28,11 +28,11 @@ void enter(){
     cout<<endl<<"Press ENTER to continue"<<endl;   //press enter to continue function
     
     cout<<endl;
-    system("read"); // or system pause
+    system("pause"); // or system pause
 }
 
 void about(){
-    system("clear"); //or system clear
+    system("cls"); //or system cls
     cout<<"Chess game v0.1"<<endl;   //about print
     cout<<"Made by Tiz314, Colox343"<<endl;
     cout<<"Source code vailable on GitHub: https://github.com/Tiz314/Chess"<<endl;
@@ -40,7 +40,7 @@ void about(){
 }
 
 void finalMsg(string winner){
-    system("clear");
+    system("cls");
     cout<<"+=================+"<<endl;
     cout<<"|      .::.       |"<<endl;
     cout<<"|      _::_       |"<<endl;
